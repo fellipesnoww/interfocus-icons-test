@@ -14,6 +14,7 @@ export default function App() {
     "Interfocus-Fill": require('./src/assets/fonts/fill/interfocus-fill.ttf'),    
   });
 
+  //Mantem o app "parado" enquanto as fontes não são carregadas
   if(fontsLoaded){    
       return (
         <ThemeProvider theme={theme}>

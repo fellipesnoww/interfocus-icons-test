@@ -10,7 +10,7 @@ export function Home() {
 
   return (
     <Container>
-      <Label >TESTE</Label>
+      <Label>TESTE</Label>
       
       {/* Componente da própria lib de icones */}
       <Ionicons name="md-checkmark-circle" size={68} color="green" />    
@@ -21,7 +21,9 @@ export function Home() {
       <FillIcon name='financial' size={68} color="#FFFFFF"/>
 
       {/* Componente default de icones possibilitando informar a familia */}
-      {/* Caso o nome de icone nao pertença a familia, será renderizado um icone de interrogação */}      
+      {/* Caso o nome de icone nao pertença a familia, será renderizado um icone de interrogação 
+      e um warning será lançado na logbox (a aplicação não será quebrada)
+      */}      
       <Icon family="brands" name='box' size={68} color="#FFFFFF"/>
 
     </Container>

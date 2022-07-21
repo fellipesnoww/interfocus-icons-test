@@ -33,7 +33,7 @@ export function Icon({family, ...rest}: InterfocusIcon) {
         return configuration[familyName];        
     }
 
-    const {glyphMap, fontName, fontPath} = getConfiguration(family);
+    const {glyphMap, fontName, fontPath} = getConfiguration(family); //Obtem as configurações com base na familia de icones
 
     //Cria um componente utilizando a vector icons de acordo com a familia e nome de icone
     const InterfocusIcon = createIconSet(glyphMap, fontName, fontPath);
@@ -47,4 +47,3 @@ export function Icon({family, ...rest}: InterfocusIcon) {
 export function DefaultIcon({...rest}: DefaultFamily) { return Icon({ family: "default", ...rest}) }
 export function BrandIcon({...rest}: BrandFamily) { return Icon({ family: "brands", ...rest}) }
 export function FillIcon({...rest}: FillFamily) { return Icon({ family: "fill", ...rest}) }
-

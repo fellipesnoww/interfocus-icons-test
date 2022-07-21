@@ -11,6 +11,8 @@ export interface Configuration {
 }
 
 //Criado esquema de configuração para facilitar busca de fontes e glyph
+//Caso queira adicionar novas fontes, basta criar uma nova propriedade com as configurações
+//conforme as anteriores
 const configuration = {
     brands: {
         fontName: "Interfocus-Brand",
