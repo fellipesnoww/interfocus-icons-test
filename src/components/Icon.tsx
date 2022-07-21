@@ -1,37 +1,50 @@
 import React from 'react';
 import { View } from 'react-native';
 import { createIconSet } from '@expo/vector-icons';
+import configuration, { BrandNames, Configuration, DefaultNames, FillNames } from '../constants/FontConfigurations';
 
-interface IconProps{
-    family: 'brands' | 'default' | 'fill';
-    name: string;
+interface IconProps{        
     size: number;
     color: string;
 }
-
-const glyphMap = { 'add': 0xe900};
-const CustomIcon = createIconSet(glyphMap, 'Interfocus-Default', require('../../assets/fonts/interfocus-default.ttf'));
-
-const configuration = {
-    brands: {
-        fontName: "Interfocus-Brand",
-        fontPath: require('../../assets/fonts/interfocus-brands.ttf'),
-        glyphMap: ""
-    },
-    default: {
-        fontName: "Interfocus-Default",
-        fontPath: require('../../assets/fonts/interfocus-default.ttf'),
-        glyphMap: ""
-    },
-    fill:{
-        fontName: "Interfocus-Fill",
-        fontPath: require('../../assets/fonts/interfocus-fill.ttf'),
-        glyphMap: ""
-    }
+interface DefaultFamily extends IconProps{
+  family?: 'default';    
+  name: DefaultNames; 
+}
+interface BrandFamily extends IconProps{
+  family?: 'brands';    
+  name: BrandNames;   
+}
+interface FillFamily extends IconProps{
+  family?: 'fill';    
+  name: FillNames;
 }
 
-export function Icon({...rest}: IconProps) {
+interface InterfocusIcon extends IconProps{
+  family: 'default' | 'brands' |'fill'; 
+  name: DefaultNames | BrandNames | FillNames
+}
+
+//Cria o component que determina a lógica de seleção de fonte e glyph
+export function Icon({family, ...rest}: InterfocusIcon) {
+
+    //Retona a configuração de acordo com a fonte selecionada
+    function getConfiguration(familyName: string): Configuration {        
+        return configuration[familyName];        
+    }
+
+    const {glyphMap, fontName, fontPath} = getConfiguration(family);
+
+    //Cria um componente utilizando a vector icons de acordo com a familia e nome de icone
+    const InterfocusIcon = createIconSet(glyphMap, fontName, fontPath);
+
   return (
-    <CustomIcon {...rest}/> 
+    <InterfocusIcon {...rest}/> 
   );
 }
+
+//Exporta novos componentes que setam por padrão a familia 
+export function DefaultIcon({...rest}: DefaultFamily) { return Icon({ family: "default", ...rest}) }
+export function BrandIcon({...rest}: BrandFamily) { return Icon({ family: "brands", ...rest}) }
+export function FillIcon({...rest}: FillFamily) { return Icon({ family: "fill", ...rest}) }
+
